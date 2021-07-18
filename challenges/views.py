@@ -4,21 +4,23 @@ from django.urls import reverse
 
 
 monthly_challenges = {
-    "january" : "Eat no meat for the entire month!",
-    "february" : "Walk for at least 20 minutes every day!",
-    "march" : "Learn Django at least 20 minutes every day!",
-    "april" : "do something in april",
-    "may" : "do something in may",
-    "june" : "do something in june",
-    "july" : "do something in july",
-    "august" : "do something in august",
-    "september" : "do something in september",
-    "october" : "do something in october",
-    "november" : "do something in november",
-    "december" : "shes"
+    "january": "Eat no meat for the entire month!",
+    "february": "Walk for at least 20 minutes every day!",
+    "march": "Learn Django at least 20 minutes every day!",
+    "april": "do something in april",
+    "may": "do something in may",
+    "june": "do something in june",
+    "july": "do something in july",
+    "august": "do something in august",
+    "september": "do something in september",
+    "october": "do something in october",
+    "november": "do something in november",
+    "december": "shes"
 
 }
 # Create your views here.
+
+
 def index(request):
     list_items = ""
     months = list(monthly_challenges.keys())
@@ -31,6 +33,7 @@ def index(request):
     response_data = f"<ul>{list_items}</ul>"
     return HttpResponse(response_data)
 
+
 def monthly_challenge_by_number(request, month):
     months = list(monthly_challenges.keys())
 
@@ -42,11 +45,12 @@ def monthly_challenge_by_number(request, month):
     return HttpResponseRedirect(redirect_path)
 
 
-
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
+        return render(request, "challenges/challenge.html", {
+            "text": challenge_text,
+            "month_name": month,
+        })
     except:
         return HttpResponseNotFound("not valid")
-
-    return HttpResponse(challenge_text)
