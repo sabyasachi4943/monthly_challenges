@@ -15,18 +15,18 @@ monthly_challenges = {
     "september": "do something in september",
     "october": "do something in october",
     "november": "do something in november",
-    "december": "shes"
+    "december": None
 
 }
 # Create your views here.
 
 
 def index(request):
-    
+
     months = list(monthly_challenges.keys())
 
     return render(request, "challenges/index.html", {
-        "months" : months
+        "months": months
     })
 
     # for month in months:
